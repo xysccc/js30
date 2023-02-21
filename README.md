@@ -1,2 +1,2 @@
 
-<div style="background-color:red">js30123</div>
+<div background-color:red>js30123</div>
