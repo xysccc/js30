@@ -1,3 +1,10 @@
+<!--
+ * @Descripttion: Spicy chicken
+ * @Author: YuShu Xiao
+ * @Date: 2023-02-16 18:32:30
+ * @LastEditors: YuShu Xiao
+ * @LastEditTime: 2023-02-21 14:38:56
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -58,7 +65,26 @@
   <audio data-key="76" src="sounds/tink.wav"></audio>
 
   <script>
-
+    function playAudio(e){
+      console.log(e.keyCode);
+      const audio=document.querySelector(`audio[data-key="${e.keyCode}"]`)
+      const key=document.querySelector(`div[data-key="${e.keyCode}"]`)
+      console.log(audio);
+      if (!audio) return
+      key.classList.add("playing")
+      audio.currentTime = 0; // 每次播放之后都使音频播放进度归零
+      audio.play()
+    }
+    function removeTransition(e){
+      if(e.propertyName!=="transform") return // 过滤其中一种事件
+      e.target.classList.remove("playing")
+    }
+    const keys=document.querySelectorAll(".key")
+    // keys是nodelist 用forEach循环
+    keys.forEach(key => {
+      key.addEventListener("transitionend",removeTransition)
+    });
+    window.addEventListener("keydown",playAudio)
   </script>
 
 </body>
