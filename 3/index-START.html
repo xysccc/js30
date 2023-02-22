@@ -1,0 +1,94 @@
+<!--
+ * @Descripttion: Spicy chicken
+ * @Author: YuShu Xiao
+ * @Date: 2023-02-21 20:35:25
+ * @LastEditors: YuShu Xiao
+ * @LastEditTime: 2023-02-22 11:46:26
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Scoped CSS Variables and JS</title>
+</head>
+<body>
+  <h2>Update CSS Variables with <span class='hl'>JS</span></h2>
+
+  <div class="controls">
+    <label for="spacing">Spacing:</label>
+    <input type="range" name="spacing" min="10" max="200" value="10" data-sizing="px">
+
+    <label for="blur">Blur:</label>
+    <input type="range" name="blur" min="0" max="10" value="0" data-sizing="px">
+
+    <label for="base">Base Color</label>
+    <input type="color" name="base" value="#ffc600">
+  </div>
+
+  <img src="https://s1.ax1x.com/2023/02/22/pSjRvi4.jpg">
+
+  <style>
+
+    /*
+      misc styles, nothing to do with CSS variables
+    */
+    :root{
+      --img-spacing:10px;
+      --img-blur:0px;
+      --img-base:#ffc600;
+    }
+    body {
+      text-align: center;
+    }
+
+    body {
+      background: #193549;
+      color: white;
+      font-family: 'helvetica neue', sans-serif;
+      font-weight: 100;
+      font-size: 50px;
+    }
+
+    .controls {
+      margin-bottom: 50px;
+    }
+
+    input {
+      width:100px;
+    }
+    img{
+      width: 400px;
+      height: 500px;
+      object-fit: cover;
+      object-position: 0px -130px;
+      padding: var(--img-spacing);
+      background-color: var(--img-base);
+      filter: blur(var(--img-blur));
+    }
+  </style>
+
+  <script>
+     const inputs = document.querySelectorAll('.controls input');
+    function handleUpdate() {
+      const suffix=this.dataset.sizing||''
+      document.documentElement.style.setProperty(`--img-${this.name}`,`${this.value}${suffix}`)
+    }
+    inputs.forEach(input => {
+      input.addEventListener("input",handleUpdate)
+    });
+    // document.querySelector(`input[name="spacing"]`).oninput=function(){
+    //   console.log(this.value);
+    //   document.documentElement.style.setProperty("--img-spacing",this.value+"px")
+    // }
+    // document.querySelector(`input[name="blur"]`).oninput=function(){
+    //   console.log(this.value);
+    //   document.documentElement.style.setProperty("--img-blur",this.value+"px")
+    // }
+    // document.querySelector(`input[name="base"]`).oninput=function(){
+    //   console.log(this.value);
+    //   document.documentElement.style.setProperty("--img-bgColor",this.value)
+    // }
+  </script>
+
+</body>
+</html>
