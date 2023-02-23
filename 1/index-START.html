@@ -3,7 +3,7 @@
  * @Author: YuShu Xiao
  * @Date: 2023-02-16 18:32:30
  * @LastEditors: YuShu Xiao
- * @LastEditTime: 2023-02-22 09:16:49
+ * @LastEditTime: 2023-02-23 10:20:20
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -76,7 +76,8 @@
       audio.play()
     }
     function removeTransition(e){
-      if(e.propertyName!=="transform") return // 过滤其中一种事件
+      console.log("remove",e.propertyName);
+      // if(e.propertyName!=="transform") return // 过滤其中一种事件
       e.target.classList.remove("playing")
     }
     const keys=document.querySelectorAll(".key")
@@ -85,6 +86,7 @@
       key.addEventListener("transitionend",removeTransition)
     });
     window.addEventListener("keydown",playAudio)
+    window.addEventListener("keyup",removeTransition)
   </script>
 
 </body>
