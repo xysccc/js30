@@ -3,7 +3,7 @@
  * @Author: YuShu Xiao
  * @Date: 2023-02-22 12:13:06
  * @LastEditors: YuShu Xiao
- * @LastEditTime: 2023-02-22 15:05:10
+ * @LastEditTime: 2023-02-23 10:52:47
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -69,9 +69,10 @@
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
     const arr6=data.reduce((obj,item)=>{
-      if (!obj[item]) {
-        obj[item]=0
-      }
+      // if (!obj[item]) {
+      //   obj[item]=0
+      // }
+      !obj[item] && (obj[item]=0)
       obj[item]++
       return obj
     },{})
