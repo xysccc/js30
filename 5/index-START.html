@@ -58,7 +58,7 @@
     .panel > * {
       margin:0;
       width: 100%;
-      transition:transform 0.5s;
+      transition:transform 0.5s 0.7s;
     }
 
     .panel p {
@@ -89,10 +89,10 @@
     .panel>*:last-child{
       transform: translateY(100%);
     }
-    .panel.open-font>*:first-child{
+    .panel.open>*:first-child{
       transform: translateY(0);
     }
-    .panel.open-font>*:last-child{
+    .panel.open>*:last-child{
       transform: translateY(0);
     }
     .cta {
@@ -138,15 +138,15 @@
       console.log(e);
       this.classList.toggle("open")
     }
-    function toggleFont(e) {
-      console.log("agshj",e.propertyName);
-      if (e.propertyName.includes('flex')) {
-        this.classList.toggle("open-font")
-      }
+    // function toggleFont(e) {
+    //   console.log("agshj",e.propertyName);
+    //   if (e.propertyName.includes('flex')) {
+    //     this.classList.toggle("open-font")
+    //   }
       
-    }
+    // }
     panels.forEach(panel=>panel.addEventListener("click",toggleOpen))
-    panels.forEach(panel=>panel.addEventListener("transitionend",toggleFont))
+    // panels.forEach(panel=>panel.addEventListener("transitionend",toggleFont))
   </script>
 
 
