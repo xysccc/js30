@@ -3,7 +3,7 @@
  * @Author: YuShu Xiao
  * @Date: 2023-02-23 15:12:32
  * @LastEditors: YuShu Xiao
- * @LastEditTime: 2023-02-23 21:15:40
+ * @LastEditTime: 2023-02-23 21:19:38
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -43,24 +43,29 @@
       }
       function displayContent() {
         const matches = filterVerse(this.value, dataArr);
-        console.log("dataArr",dataArr);
-        console.log("matches",matches);
-        const html = matches.map((item) => {
-          const regex = new RegExp(this.value, "gi");
-          const text = item.detail_text.replace(
-            regex,
-            `<span class="h1">${this.value}</span>`
-          );
-          const title = item.title.replace(
-            regex,
-            `<span class="h1">${this.value}</span>`
-          );
-          const author=item.detail_author[0].replace(regex,`<span class="h1">${this.value}</span>`)
-          return `<li>
+        console.log("dataArr", dataArr);
+        console.log("matches", matches);
+        const html = matches
+          .map((item) => {
+            const regex = new RegExp(this.value, "gi");
+            const text = item.detail_text.replace(
+              regex,
+              `<span class="h1">${this.value}</span>`
+            );
+            const title = item.title.replace(
+              regex,
+              `<span class="h1">${this.value}</span>`
+            );
+            const author = item.detail_author[0].replace(
+              regex,
+              `<span class="h1">${this.value}</span>`
+            );
+            return `<li>
             <span class="poet">${text}</span>
             <span class="title">${title}-${author}</span>
             </li>`;
-        }).join('');
+          })
+          .join("");
         suggestions.innerHTML = html;
       }
       ipt.addEventListener("change", displayContent);
