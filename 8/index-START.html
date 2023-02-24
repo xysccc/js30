@@ -1,19 +1,64 @@
+<!--
+ * @Descripttion: Spicy chicken
+ * @Author: YuShu Xiao
+ * @Date: 2023-02-24 15:15:58
+ * @LastEditors: YuShu Xiao
+ * @LastEditTime: 2023-02-24 22:28:41
+-->
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>HTML5 Canvas</title>
-</head>
-<body>
-<canvas id="draw" width="800" height="800"></canvas>
-<script>
-</script>
+  <head>
+    <meta charset="UTF-8" />
+    <title>HTML5 Canvas</title>
+  </head>
+  <body>
+    <canvas id="draw" width="800" height="800"></canvas>
+    <script>
+      const canvas = document.getElementById("draw");
+      const ctx = canvas.getContext("2d");
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      let isDrawing = false;
+      let hue = 0;
+      let lastX = 0;
+      let lastY = 0;
+      ctx.lineWidth = 90;
+      ctx.lineCap = "round";
+      ctx.lineJoin = "round";
+      ctx.strokeStyle = "#f00";
+      ctx.fillStyle = "#f00";
+      
+      function draw(e) {
+        if (!isDrawing) return;
+        //		彩虹效果
+        ctx.strokeStyle = `hsl(${hue}, 90%, 50%`;
+        if (hue >= 360) hue = 0;
+        hue++;
+        
+        ctx.beginPath();
+        ctx.moveTo(lastX, lastY);
+        // [lastX, lastY] = [e.offsetX, e.offsetY];
+        ctx.lineTo(e.offsetX, e.offsetY);
+        ctx.stroke()
+       
+      }
 
-<style>
-  html, body {
-    margin:0;
-  }
-</style>
+      canvas.addEventListener("mousedown", (e) => {
+        console.log(e);
+        isDrawing = true
+        [lastX, lastY] = [e.offsetX, e.offsetY];
+      });
+      canvas.addEventListener("mousemove", draw);
+      canvas.addEventListener("mouseup", () => (isDrawing = false));
+      canvas.addEventListener("mouseout", () => (isDrawing = false));
+    </script>
 
-</body>
+    <style>
+      html,
+      body {
+        overflow: hidden;
+        margin: 0;
+      }
+    </style>
+  </body>
 </html>
