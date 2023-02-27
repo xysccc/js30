@@ -1,0 +1,29 @@
+<!--
+ * @Descripttion: Spicy chicken
+ * @Author: YuShu Xiao
+ * @Date: 2023-02-27 20:15:52
+ * @LastEditors: YuShu Xiao
+ * @LastEditTime: 2023-02-27 20:50:30
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Key Detection</title>
+  <script type="text/javascript" src="http://www.cornify.com/js/cornify.js"></script>
+</head>
+<body>
+<script>
+  // cornify_add();
+  const arr=[], secretCode = 'xys'
+  window.addEventListener('keyup', (e) => {
+    console.log(secretCode.length);
+    arr.push(e.key)
+    arr.splice(-secretCode.length - 1,arr.length-secretCode.length)
+    if (arr.join('').includes(secretCode)) {
+      cornify_add()
+    }
+  })
+</script>
+</body>
+</html>

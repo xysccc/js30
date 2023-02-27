@@ -3,7 +3,7 @@
  * @Author: YuShu Xiao
  * @Date: 2023-02-27 16:50:38
  * @LastEditors: YuShu Xiao
- * @LastEditTime: 2023-02-27 20:08:22
+ * @LastEditTime: 2023-02-27 20:15:18
  */
 const player = document.querySelector(".player");
 const video = player.querySelector(".viewer");
@@ -56,13 +56,10 @@ ranges.forEach(range=>range.addEventListener("mouseup",()=>isSliding=false))
 ranges.forEach(range=>range.addEventListener("change",handleRangeUpdate))
 ranges.forEach(range=>range.addEventListener("mousemove",handleRangeUpdate))
 
-let qp=false
+
 document.querySelector(".qp").onclick=function(e) {
-    if (!qp) {
-        console.log(video);
         video.classList.toggle("qp")
         player.classList.toggle("qp")
-    }
 }
 
 
