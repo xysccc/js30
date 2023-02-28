@@ -240,20 +240,20 @@
       function checkSlide(e) {
         console.log(e);
         console.count(e);
-        slideImages.forEach(img => {
-          const slideInAt = window.scrollY + window.innerHeight - img.height / 2;
-        const imgBottom = img.offsetTop + img.height;
-        // 已滑过了图片的一半
-        const isHalfShow = slideInAt > img.offsetTop;
-        // 未完全滑过图片
-        const isNotScrollPast = window.scrollY < imgBottom;
-        if (isHalfShow && isNotScrollPast) {
-          img.classList.add("active");
-        } else {
-          img.classList.remove("active");
-        }
-        })
-       
+        slideImages.forEach((img) => {
+          const slideInAt =
+            window.scrollY + window.innerHeight - img.height / 2;
+          const imgBottom = img.offsetTop + img.height;
+          // 已滑过了图片的一半
+          const isHalfShow = slideInAt > img.offsetTop;
+          // 未完全滑过图片
+          const isNotScrollPast = window.scrollY < imgBottom;
+          if (isHalfShow && isNotScrollPast) {
+            img.classList.add("active");
+          } else {
+            img.classList.remove("active");
+          }
+        });
       }
 
       const slideImages = document.querySelectorAll(".slide-in");
