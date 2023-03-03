@@ -1,0 +1,45 @@
+<!--
+ * @Descripttion: Spicy chicken
+ * @Author: YuShu Xiao
+ * @Date: 2023-03-02 20:44:56
+ * @LastEditors: YuShu Xiao
+ * @LastEditTime: 2023-03-02 21:21:19
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Video Speed Scrubber</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="wrapper">
+    <video class="flex" width="765" height="430" src="http://clips.vorwaerts-gmbh.de/VfE_html5.mp4" loop controls></video>
+    <div class="speed">
+      <div class="speed-bar">1×</div>
+    </div>
+  </div>
+
+<script>
+   const video = document.querySelector(".flex");
+   const speed = document.querySelector(".speed");
+  const speedBar = speed.querySelector(".speed-bar");
+  function changeRate(e) {
+    // 相对位置
+    console.log(e.offsetY);
+    console.dir(speed);
+    const max=4
+    const min=0.5
+    const percentage = e.offsetY / speed.offsetHeight;
+     //依据自定义播放速度范围和滑块高度百分比确定播放速率
+     const playbackRate = percentage * (max - min) + min;
+    speedBar.style.height=`${Math.round(percentage*100)}%`
+    console.log(playbackRate);
+    speedBar.textContent=`${playbackRate.toFixed(2)}x`
+    video.playbackRate=playbackRate
+  }
+  speed.addEventListener("click",changeRate)
+</script>
+</body>
+</html>

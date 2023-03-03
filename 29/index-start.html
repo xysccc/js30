@@ -1,0 +1,82 @@
+<!--
+ * @Descripttion: Spicy chicken
+ * @Author: YuShu Xiao
+ * @Date: 2023-03-02 21:25:52
+ * @LastEditors: YuShu Xiao
+ * @LastEditTime: 2023-03-03 13:59:27
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Countdown Timer</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Inconsolata"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="timer">
+      <div class="timer__controls">
+        <button data-time="20" class="timer__button">20 Secs</button>
+        <button data-time="300" class="timer__button">Work 5</button>
+        <button data-time="900" class="timer__button">Quick 15</button>
+        <button data-time="1200" class="timer__button">Snack 20</button>
+        <button data-time="3600" class="timer__button">Lunch Break</button>
+        <form name="customForm" id="custom">
+          <input type="text" name="minutes" placeholder="Enter Minutes" />
+        </form>
+      </div>
+      <div class="display">
+        <h1 class="display__time-left"></h1>
+        <p class="display__end-time"></p>
+      </div>
+    </div>
+
+    <!-- <script src="scripts-START.js"></script> -->
+    <script>
+      const endTime = document.querySelector(".display__end-time");
+      const RemainingTimeDom = document.querySelector(".display__time-left");
+      const buttons = document.querySelectorAll("button");
+      // const date = new Date();
+      // 剩余时间
+      let RemainingTime=0
+      //结束时间(ms)
+      let end=0
+      let timer;//interval计时器
+      RemainingTimeDom.innerHTML = RemainingTime
+      buttons.forEach(button=>button.addEventListener("click",clickBtn))
+      document.customForm.addEventListener("submit",function (e){
+        e.preventDefault()
+        console.log("ashnjk");
+        addTime(this.minutes.value*60);
+        updateTimer()
+      })
+
+      function addTime(addSecond) {
+        RemainingTime+=parseInt(addSecond)
+        end = new Date().getTime() + RemainingTime*1000;
+        RemainingTimeDom.innerHTML = RemainingTime
+        endTime.innerHTML=`${new Date(end).toLocaleTimeString()}`
+      }
+
+      function updateTimer() {
+        if (timer) clearInterval(timer)
+        timer=setInterval(()=>{
+          if (RemainingTime===0){
+            endTime.innerHTML='End'
+          }else{
+            RemainingTime-=1
+            RemainingTimeDom.innerHTML=RemainingTime
+          }
+        },1000)
+      }
+      function clickBtn(e) {
+        addTime(this.dataset.time)
+        updateTimer()
+      }
+    </script>
+  </body>
+</html>
